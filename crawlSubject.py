@@ -1,5 +1,4 @@
 import requests, json
-from bs4 import BeautifulSoup
 
 from openpyxl import load_workbook
 from openpyxl import Workbook
