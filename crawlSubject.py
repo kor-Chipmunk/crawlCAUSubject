@@ -6,6 +6,10 @@ from openpyxl import Workbook
 
 year = "2019"
 campfgs = ["1", "2"]
+shtm = '2'
+
+if shtm in ['S', 'W']:
+    campfgs.remove("1")
 
 for campfg in campfgs:
     URL = "https://mportal.cau.ac.kr/std/usk/sUskSif001/selectParam.ajax"
@@ -31,7 +35,7 @@ for campfg in campfgs:
     # 대학들 마다 세부 전공 탐색
     for idx, colg in enumerate(colgList):
         URL = "https://mportal.cau.ac.kr/std/usk/sUskSif001/selectSust.ajax"
-        params = {'year': year, 'campfg': campfg, 'course': "3", 'gb': "3", 'colgcd': colg['code'], 'shtm': "2"}
+        params = {'year': year, 'campfg': campfg, 'course': "3", 'gb': "3", 'colgcd': colg['code'], 'shtm': shtm}
         headers = {'Content-Type': 'application/json; charset=utf-8'}
 
         res = requests.post(URL, headers=headers, data=json.dumps(params))
@@ -58,7 +62,7 @@ for campfg in campfgs:
         
         for sust in susts:
             URL = "https://mportal.cau.ac.kr/std/usk/sUskSif001/selectSbjt.ajax"
-            params = {"year":year,"campfg":campfg,"course":"3","gb":"3","colgcd":colg['code'], "shtm":"2", "sust":sust['code'], "search_gb": search_gb, "kornm":""}
+            params = {"year":year,"campfg":campfg,"course":"3","gb":"3","colgcd":colg['code'], "shtm":shtm, "sust":sust['code'], "search_gb": search_gb, "kornm":""}
             headers = {'Content-Type': 'application/json; charset=utf-8'}
 
             res = requests.post(URL, headers=headers, data=json.dumps(params))
