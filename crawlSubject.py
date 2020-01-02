@@ -3,9 +3,9 @@ import requests, json
 from openpyxl import load_workbook
 from openpyxl import Workbook
 
-year = "2019"
+year = "2020"
 campfgs = ["1", "2"]
-shtm = '2'
+shtm = '1'
 
 if shtm in ['S', 'W']:
     campfgs.remove("1")
@@ -80,9 +80,10 @@ for campfg in campfgs:
                                     , '' if subject['sustnm'] == None else subject['sustnm'] \
                                     , subject['remk']])
 
-        for row in exportTable:
-            write_ws.append(row)
+        if len(exportTable) > 1:
+            for row in exportTable:
+                write_ws.append(row)
 
-        write_wb.save('{} - {}.csv'.format("서울캠퍼스" if campfg == "1" else "안성캠퍼스",colg['name']))
-        
-        print('{} - {} 파일 완료'.format("서울캠퍼스" if campfg == "1" else "안성캠퍼스",colg['name']))
+            write_wb.save('{} - {}.xlsx'.format("서울캠퍼스" if campfg == "1" else "안성캠퍼스",colg['name']))
+            
+            print('{} - {} 파일 완료'.format("서울캠퍼스" if campfg == "1" else "안성캠퍼스",colg['name']))
