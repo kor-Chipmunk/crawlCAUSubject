@@ -41,4 +41,8 @@ Temporary Items
 # Ignore all local history of files
 .history
 
+## Excel ###
+*.xlsx
+*.xls
+
 # End of https://www.gitignore.io/api/macos,visualstudiocode
